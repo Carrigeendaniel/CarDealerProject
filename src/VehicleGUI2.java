@@ -141,24 +141,24 @@ public class VehicleGUI2 extends JFrame implements ActionListener, Serializable 
             processSearch(manufacturerSearchTerm, modelSearchTerm, yearSearchTerm, engineSearchTerm);//Taking the arguements here
         }
 
-        if (e.getActionCommand().equals ("Export Stock Data"))
+        if (e.getActionCommand().equals ("Export Stock Data")) //if you click "Export Stock Data" in the menu
         {
-            save();
+            save(); //Execute this method. See below
 
         }
 
-        if (e.getActionCommand().equals ("Import Stock Data"))
+        if (e.getActionCommand().equals ("Import Stock Data"))//if you click "Import Stock Data" in the menu
         {
-            open();
+            open();//Execute this method. See below
         }
-        if (e.getActionCommand().equals ("Add Car To Stock"))
+        if (e.getActionCommand().equals ("Add Car To Stock"))//if you click "Add Car To Stock" in the menu
         {
-            addCarToStock();
+            addCarToStock();//Execute this method. See below
         }
 
-        if (e.getActionCommand().equals ("Add Motorcycle To Stock"))
+        if (e.getActionCommand().equals ("Add Motorcycle To Stock"))//if you click "Add Motorcycle To Stock" in the menu
         {
-            addMotorcycleToStock();
+            addMotorcycleToStock();//Execute this method. See below
         }
         if (e.getActionCommand().equals ("Quit"))
         {
@@ -200,7 +200,10 @@ public class VehicleGUI2 extends JFrame implements ActionListener, Serializable 
 
 	}
 
-    public void save()  {
+	/**This method instantiates an ObjectOutputStream Object.
+     * This allows the traleeDealer object to be outputed to
+     * an external file called stock.dat**/
+    public void save(){
         try{
 
             os = new ObjectOutputStream(new FileOutputStream("stock.dat"));
@@ -215,18 +218,20 @@ public class VehicleGUI2 extends JFrame implements ActionListener, Serializable 
 
     }
 
-    public static void open()
-    {
+    /**This method instantiates an ObjectInputStream Object. This retrieves the traleeDealer object that was previously saved to the stock.dat file
+     * this method also gets the stock information that was saved in that onject, and puts it into our current traleeDealer file.
+     * This allows us to save your stock and then uploaded the latest version when the application is launched**/
+    public static void open() {
         try{
 
-        is = new ObjectInputStream(new FileInputStream("stock.dat"));
-        traleeDealer = (Dealership) is.readObject();
-            ArrayList<Vehicle> s  =  traleeDealer.stock;
+        is = new ObjectInputStream(new FileInputStream("stock.dat")); //reads in the stock.dat file
+        traleeDealer = (Dealership) is.readObject(); //gets the traleeDealer object from the file and sets the applications traleeDealer to it.
 
-            for (Vehicle v :s)
-            {
-                System.out.println(v);
-            }
+        ArrayList<Vehicle> s  =  traleeDealer.stock; // this logs the vehicles being imported, in the console
+        for (Vehicle v :s)
+        {
+            System.out.println(v);
+        }
 
         is.close();
         JOptionPane.showMessageDialog(null,"Successfully loaded in stock data");
@@ -238,7 +243,9 @@ public class VehicleGUI2 extends JFrame implements ActionListener, Serializable 
     }
     }
 
+    /**This method allows a user to add a new Car into the stock of traleeDealer, from the GUI**/
     public static void addCarToStock() {
+
         String make = JOptionPane.showInputDialog(null, "Enter Car Manufacturer: ", "Add details", JOptionPane.INFORMATION_MESSAGE);
         String model = JOptionPane.showInputDialog(null,"Enter Car Model: ", "Add Details", JOptionPane.INFORMATION_MESSAGE);
         int year = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Year of registration: ","Add Details", JOptionPane.INFORMATION_MESSAGE));
@@ -251,7 +258,11 @@ public class VehicleGUI2 extends JFrame implements ActionListener, Serializable 
         traleeDealer.stock.add(c1);
     }
 
+    /**This method allows a user to add a new Motorbike into the stock of traleeDealer, from the GUI
+     * **/
     public static void addMotorcycleToStock() {
+
+
         String make = JOptionPane.showInputDialog(null, "Enter Motorcycle Manufacturer: ", "Add details", JOptionPane.INFORMATION_MESSAGE);
         String model = JOptionPane.showInputDialog(null,"Enter Motorcycle Model: ", "Add Details", JOptionPane.INFORMATION_MESSAGE);
         int year = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Year of registration: ","Add Details", JOptionPane.INFORMATION_MESSAGE));
@@ -263,7 +274,19 @@ public class VehicleGUI2 extends JFrame implements ActionListener, Serializable 
         traleeDealer.stock.add(m1);
     }
 
-    private void processSearch(String manufacturerTerm, String modelTerm, String yearTerm, String engineTerm) { //Method being defined, what it expects to take in, list of parameters
+
+    /**
+     * Takes in strings that represented what was typed into the search fields on the GUI.
+     * It then searches the stock attribute (which is an ArrayList of vehicles) of the Dealership class for vehicles that match the search terms
+     * It then updates the resultsBox with the correct results
+     * @param manufacturerTerm The value that was in the makeField in the GUI
+     * @param modelTerm The value that was in the modelField in the GUI
+     * @param yearTerm The value that was in the yearField in the GUI
+     * @param engineTerm  The value that was in the engineField in the GUI
+     * @return void
+     */
+    private void processSearch(String manufacturerTerm, String modelTerm, String yearTerm, String engineTerm) {
+
 
         for (Vehicle vehicle :traleeDealer.stock) {//advanced for loop//This executes the below code for every Vehicle in our arraylist called traleeDealer.stock
                                             //For each vehicle object (which will call vehicle) in the collection 'traleeDealer.stock', do the following:
