@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * 19/11/2016.
  */
-public class Vehicle {
+public class Vehicle implements Serializable {
 
     private String manufacturer;
     private String model;

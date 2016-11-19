@@ -1,7 +1,9 @@
 //
 
 
-public class Car extends Vehicle{
+import java.io.Serializable;
+
+public class Car extends Vehicle implements Serializable{
 
 	//Attributes
     private boolean NCTCovered;
@@ -15,7 +17,7 @@ public class Car extends Vehicle{
     }
 
     public Car(String manufacturer, String model, int year, String engine, double price, boolean nct) {
-        super();
+        super(manufacturer, model, year, engine, price);
         this.NCTCovered = nct;
     }
 
@@ -29,8 +31,9 @@ public class Car extends Vehicle{
         this.NCTCovered = NCTCovered;
     }
 
-    @Override
     public String toString() {
-        return super.toString() + "\nNCT Paid: " + isNCTCovered();
+        return super.toString() + "\nNCT Paid: " + isNCTCovered()+"\n*********************";
     }
+
+
 }
