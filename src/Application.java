@@ -6,7 +6,7 @@ import java.awt.*;
 import java.io.*; //Saving to external file
 import java.util.ArrayList;
 
-public class VehicleGUI2 extends JFrame implements ActionListener, Serializable {
+public class Application extends JFrame implements ActionListener, Serializable {
 
 
     JMenu stockMenu;
@@ -24,7 +24,7 @@ public class VehicleGUI2 extends JFrame implements ActionListener, Serializable 
 
 
 
-	public VehicleGUI2() {
+	public Application() {
 
         /**Creating the gui container**/
         frame = new JFrame();
@@ -194,7 +194,7 @@ public class VehicleGUI2 extends JFrame implements ActionListener, Serializable 
 
 
 
-        VehicleGUI2 guiApp = new VehicleGUI2();
+        Application guiApp = new Application();
 
 
 
