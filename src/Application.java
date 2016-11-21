@@ -187,7 +187,7 @@ public class Application extends JFrame implements ActionListener, Serializable 
         traleeDealer.addVehicle(m2);
 
         Application guiApp = new Application();
-        
+
 	}
 
 	/**This method instantiates an ObjectOutputStream Object.
