@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class Application extends JFrame implements ActionListener, Serializable {
 
-
     JMenu stockMenu;
     JMenuItem item1, item2, item3, item4, item5;
     JPanel inputPanel,resultsPanel;
@@ -19,10 +18,7 @@ public class Application extends JFrame implements ActionListener, Serializable 
     JFrame frame;
     ObjectOutputStream os;//Allows you to output data from your program, eg to a file
     static ObjectInputStream is;//The opposite, allows you to take in information to your program
-
 	static Dealership traleeDealer;//Object of our dealership class
-
-
 
 	public Application() {
 
@@ -117,7 +113,6 @@ public class Application extends JFrame implements ActionListener, Serializable 
         item5.addActionListener(this);
         stockMenu.add(item5);
 
-
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
         menuBar.add(stockMenu);
@@ -125,7 +120,6 @@ public class Application extends JFrame implements ActionListener, Serializable 
 
         frame.setSize(650, 1000);
 	}
-
 
 	public void actionPerformed(ActionEvent e) {//What happens when an event occurs
 
@@ -192,12 +186,8 @@ public class Application extends JFrame implements ActionListener, Serializable 
         traleeDealer.addVehicle(m1);
         traleeDealer.addVehicle(m2);
 
-
-
         Application guiApp = new Application();
-
-
-
+        
 	}
 
 	/**This method instantiates an ObjectOutputStream Object.
