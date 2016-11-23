@@ -1,9 +1,7 @@
-import java.io.Serializable;
+//Vehicle class
+import java.io.Serializable;//saving file, and restoring file
 
-/**
- * 19/11/2016.
- */
-public class Vehicle implements Serializable {
+public class Vehicles implements Serializable {
 
     private String manufacturer;
     private String model;
@@ -11,7 +9,7 @@ public class Vehicle implements Serializable {
     private String engine;
     private double price;
 
-    public Vehicle() {
+    public Vehicles() {
         this.manufacturer = "Unknown";
         this.model = "Unknown";
         this.year = 0;
@@ -19,7 +17,7 @@ public class Vehicle implements Serializable {
         this.price = 0.0;
     }
 
-    public Vehicle(String manufacturer, String model, int year, String engine, double price) {
+    public Vehicles(String manufacturer, String model, int year, String engine, double price) {
         this.manufacturer = manufacturer;
         this.model = model;
         this.year = year;
@@ -69,7 +67,6 @@ public class Vehicle implements Serializable {
     }
 
     /**************toString**************/
-
     public String toString() {
         return "Car Details:" +
                 "\nManufacturer: " + manufacturer +

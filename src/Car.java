@@ -1,9 +1,9 @@
-//
+//Car class
 
 
 import java.io.Serializable;
 
-public class Car extends Vehicle implements Serializable{
+public class Car extends Vehicles implements Serializable{
 
 	//Attributes
     private boolean NCTCovered;
@@ -11,7 +11,7 @@ public class Car extends Vehicle implements Serializable{
 	
 	/********************************/
 
-	//No arguement constructor
+	//No argument constructor
     public Car() {
         super();
     }

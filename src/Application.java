@@ -1,4 +1,4 @@
-/*TODO*/
+//Driver and GUI class
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -34,9 +34,10 @@ public class Application extends JFrame implements ActionListener, Serializable 
          * and adding them to the frame**/
         inputPanel = new JPanel();//Panel sits on JFrame
 		inputPanel.setSize(650, 300);
-        inputPanel.setBackground(Color.green); //all jpanels have to be changed colour individualyy
+        inputPanel.setBackground(Color.red); //all jpanels have to be changed colour individualyy
 
 		resultsPanel = new JPanel();//Make object name relevant
+
 
         frame.add(inputPanel, BorderLayout.SOUTH);
         frame.add(resultsPanel,  BorderLayout.SOUTH);
@@ -74,7 +75,7 @@ public class Application extends JFrame implements ActionListener, Serializable 
 
         /**creating the results text area and adding it to the results panel**/
         resultsBox = new JTextArea();
-        resultsBox.setSize(600,200);
+        resultsBox.setSize(300,200);
         resultsPanel.setVisible(true);
 
         resultsPanel.add(resultsBox);
@@ -85,7 +86,6 @@ public class Application extends JFrame implements ActionListener, Serializable 
 		yearField.addActionListener(this);
 		engineField.addActionListener(this);
 		searchButton.addActionListener(this);
-
 
         /***************Menu Stuff******************/
         stockMenu = new JMenu("Stock Management");
@@ -148,6 +148,7 @@ public class Application extends JFrame implements ActionListener, Serializable 
         if (e.getActionCommand().equals ("Add Car To Stock"))//if you click "Add Car To Stock" in the menu
         {
             addCarToStock();//Execute this method. See below
+
         }
 
         if (e.getActionCommand().equals ("Add Motorcycle To Stock"))//if you click "Add Motorcycle To Stock" in the menu
@@ -172,8 +173,10 @@ public class Application extends JFrame implements ActionListener, Serializable 
         Car c5 = new Car("Toyota", "Yaris", 2012, "Diesel", 15000, false);
         Car c6 = new Car("Nissan", "Pulsar", 2016, "Petrol", 22000, true);
         Car c7 = new Car("Nissan", "Almera", 2003, "Diesel", 5000, false);
-        Motorcycle m1 = new Motorcycle("Yamaha", "dX7", 2009, "Petrol", 10000);
-        Motorcycle m2 = new Motorcycle("Ducatti", "Turbo", 2013, "Diesel", 20000);
+        Car c8 = new Car("Opel", "Astra", 2003, "Petrol", 3000, true);
+
+        Motorcycles m1 = new Motorcycles("Yamaha", "dX7", 2009, "Petrol", 10000);
+        Motorcycles m2 = new Motorcycles("Ducatti", "Turbo", 2013, "Diesel", 20000);
 
         traleeDealer.addVehicle(c1);
         traleeDealer.addVehicle(c2);
@@ -182,6 +185,7 @@ public class Application extends JFrame implements ActionListener, Serializable 
         traleeDealer.addVehicle(c5);
         traleeDealer.addVehicle(c6);
         traleeDealer.addVehicle(c7);
+        traleeDealer.addVehicle(c8);
 
         traleeDealer.addVehicle(m1);
         traleeDealer.addVehicle(m2);
@@ -217,8 +221,8 @@ public class Application extends JFrame implements ActionListener, Serializable 
         is = new ObjectInputStream(new FileInputStream("stock.dat")); //reads in the stock.dat file
         traleeDealer = (Dealership) is.readObject(); //gets the traleeDealer object from the file and sets the applications traleeDealer to it.
 
-        ArrayList<Vehicle> s  =  traleeDealer.stock; // this logs the vehicles being imported, in the console
-        for (Vehicle v :s)
+        ArrayList<Vehicles> s  =  traleeDealer.stock; // this logs the vehicles being imported, in the console
+        for (Vehicles v :s)
         {
             System.out.println(v);
         }
@@ -259,7 +263,7 @@ public class Application extends JFrame implements ActionListener, Serializable 
         String engine = JOptionPane.showInputDialog(null, "Enter Engine Type (Petrol or Diesel): ","Add Details", JOptionPane.INFORMATION_MESSAGE);
         double price = Double.parseDouble(JOptionPane.showInputDialog(null,"Enter Motorcycle Price: ","Add Details", JOptionPane.INFORMATION_MESSAGE));
 
-        Motorcycle m1 = new Motorcycle(make, model, year, engine, price);
+        Motorcycles m1 = new Motorcycles(make, model, year, engine, price);
 
         traleeDealer.stock.add(m1);
     }
@@ -278,7 +282,7 @@ public class Application extends JFrame implements ActionListener, Serializable 
     private void processSearch(String manufacturerTerm, String modelTerm, String yearTerm, String engineTerm) {
 
 
-        for (Vehicle vehicle :traleeDealer.stock) {//advanced for loop//This executes the below code for every Vehicle in our arraylist called traleeDealer.stock
+        for (Vehicles vehicle :traleeDealer.stock) {//advanced for loop//This executes the below code for every Vehicle in our arraylist called traleeDealer.stock
                                             //For each vehicle object (which will call vehicle) in the collection 'traleeDealer.stock', do the following:
 
             if ((vehicle.getManufacturer().equals(manufacturerTerm)) && //If you search by Vehicle MAKE, and left the other three fields blank
@@ -314,6 +318,21 @@ public class Application extends JFrame implements ActionListener, Serializable 
                     (engineField.getText().equals(""))) {
                 resultsBox.append(vehicle.toString()); //put the results in the results box that match your search
             }
+            /*if ((vehicle.getModel().equals(modelTerm)) && //If you search by Vehicle MAKE AND MODEL, and left the other two fields blank
+                    (vehicle.getManufacturer().equals(manufacturerTerm)) &&
+                    (yearField.getText().equals("")) &&//
+                    (engineField.getText().equals(""))) {
+                resultsBox.append(vehicle.toString()); //put the results in the results box that match your search
+            }*/
+            /*if ((vehicle.getModel().equals(modelTerm)) && //If you search by Vehicle MAKE AND MODEL, and left the other two fields blank
+                    (vehicle.getManufacturer().equals(manufacturerTerm)) &&
+                    (yearField.getText().equals("")) &&//
+                    (engineField.getText().equals(""))) {
+                resultsBox.append(vehicle.toString()); //put the results in the results box that match your search
+            }*/
+
+            
+            /**TODO add to algo**/
         }
     }
 
