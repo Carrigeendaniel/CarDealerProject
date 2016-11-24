@@ -166,29 +166,29 @@ public class Application extends JFrame implements ActionListener, Serializable 
 	{
         traleeDealer = new Dealership();
 
-        Car c1 = new Car("Ford", "Mondeo", 2015, "Diesel", 25000, true);
-        Car c2 = new Car("Ford", "Focus", 2012, "Diesel", 16000, true);
-        Car c3 = new Car("Ford", "Focus", 2009, "Petrol", 10000, true);
-        Car c4 = new Car("Toyota", "Avensis", 2014, "Petrol", 15000, true);
-        Car c5 = new Car("Toyota", "Yaris", 2012, "Diesel", 15000, false);
-        Car c6 = new Car("Nissan", "Pulsar", 2016, "Petrol", 22000, true);
-        Car c7 = new Car("Nissan", "Almera", 2003, "Diesel", 5000, false);
-        Car c8 = new Car("Opel", "Astra", 2003, "Petrol", 3000, true);
+        Car car1 = new Car("Ford", "Mondeo", 2015, "Diesel", 25000, true);
+        Car car2 = new Car("Ford", "Focus", 2012, "Diesel", 16000, true);
+        Car car3 = new Car("Ford", "Focus", 2009, "Petrol", 10000, true);
+        Car car4 = new Car("Toyota", "Avensis", 2014, "Petrol", 15000, true);
+        Car car5 = new Car("Toyota", "Yaris", 2012, "Diesel", 15000, false);
+        Car car6 = new Car("Nissan", "Pulsar", 2016, "Petrol", 22000, true);
+        Car car7 = new Car("Nissan", "Almera", 2003, "Diesel", 5000, false);
+        Car car8 = new Car("Opel", "Astra", 2003, "Petrol", 3000, true);
 
-        Motorcycles m1 = new Motorcycles("Yamaha", "dX7", 2009, "Petrol", 10000);
-        Motorcycles m2 = new Motorcycles("Ducatti", "Turbo", 2013, "Diesel", 20000);
+        Motorcycles motorcycle1 = new Motorcycles("Yamaha", "dX7", 2009, "Petrol", 10000);
+        Motorcycles motorcycle2 = new Motorcycles("Ducatti", "Turbo", 2013, "Diesel", 20000);
 
-        traleeDealer.addVehicle(c1);
-        traleeDealer.addVehicle(c2);
-        traleeDealer.addVehicle(c3);
-        traleeDealer.addVehicle(c4);
-        traleeDealer.addVehicle(c5);
-        traleeDealer.addVehicle(c6);
-        traleeDealer.addVehicle(c7);
-        traleeDealer.addVehicle(c8);
+        traleeDealer.addVehicle(car1);
+        traleeDealer.addVehicle(car2);
+        traleeDealer.addVehicle(car3);
+        traleeDealer.addVehicle(car4);
+        traleeDealer.addVehicle(car5);
+        traleeDealer.addVehicle(car6);
+        traleeDealer.addVehicle(car7);
+        traleeDealer.addVehicle(car8);
 
-        traleeDealer.addVehicle(m1);
-        traleeDealer.addVehicle(m2);
+        traleeDealer.addVehicle(motorcycle1);
+        traleeDealer.addVehicle(motorcycle2);
 
         Application guiApp = new Application();
 
@@ -318,18 +318,21 @@ public class Application extends JFrame implements ActionListener, Serializable 
                     (engineField.getText().equals(""))) {
                 resultsBox.append(vehicle.toString()); //put the results in the results box that match your search
             }
-            /*if ((vehicle.getModel().equals(modelTerm)) && //If you search by Vehicle MAKE AND MODEL, and left the other two fields blank
+
+
+            //TODO new bits to algo
+            if ((vehicle.getModel().equals(modelTerm)) && //If you search by Vehicle MAKE AND MODEL, and left the other two fields blank
                     (vehicle.getManufacturer().equals(manufacturerTerm)) &&
                     (yearField.getText().equals("")) &&//
                     (engineField.getText().equals(""))) {
                 resultsBox.append(vehicle.toString()); //put the results in the results box that match your search
-            }*/
-            /*if ((vehicle.getModel().equals(modelTerm)) && //If you search by Vehicle MAKE AND MODEL, and left the other two fields blank
+            }
+            if ((vehicle.getModel().equals(modelTerm)) && //If you search by Vehicle MAKE AND MODEL, and left the other two fields blank
                     (vehicle.getManufacturer().equals(manufacturerTerm)) &&
                     (yearField.getText().equals("")) &&//
                     (engineField.getText().equals(""))) {
                 resultsBox.append(vehicle.toString()); //put the results in the results box that match your search
-            }*/
+            }
 
             
             /**TODO add to algo**/
