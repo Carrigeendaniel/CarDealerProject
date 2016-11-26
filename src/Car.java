@@ -3,7 +3,7 @@
 
 import java.io.Serializable;
 
-public class Car extends Vehicles implements Serializable{
+public class Car extends Vehicle implements Serializable{
 
 	//Attributes
     private boolean NCTCovered;

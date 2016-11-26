@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.io.*; //Saving to external file
-import java.util.ArrayList;
+
 
 public class Application extends JFrame implements ActionListener, Serializable {
 
@@ -125,14 +125,9 @@ public class Application extends JFrame implements ActionListener, Serializable 
 
 		if (e.getSource() == searchButton) {//The event is the search button being clicked do this
 
-			String manufacturerSearchTerm = makeField.getText();
-            String modelSearchTerm = modelField.getText();
-            String yearSearchTerm = yearField.getText();
-            String engineSearchTerm = engineField.getText();
-
             resultsBox.setText("");//Clears previous search results when search button is clicked
 
-            processSearch(manufacturerSearchTerm, modelSearchTerm, yearSearchTerm, engineSearchTerm);//Taking the arguements here
+            processSearch();//
         }
 
         if (e.getActionCommand().equals ("Export Stock Data")) //if you click "Export Stock Data" in the menu
@@ -175,8 +170,8 @@ public class Application extends JFrame implements ActionListener, Serializable 
         Car car7 = new Car("Nissan", "Almera", 2003, "Diesel", 5000, false);
         Car car8 = new Car("Opel", "Astra", 2003, "Petrol", 3000, true);
 
-        Motorcycles motorcycle1 = new Motorcycles("Yamaha", "dX7", 2009, "Petrol", 10000);
-        Motorcycles motorcycle2 = new Motorcycles("Ducatti", "Turbo", 2013, "Diesel", 20000);
+        Motorcycle motorcycle1 = new Motorcycle("Yamaha", "dX7", 2009, "Petrol", 10000);
+        Motorcycle motorcycle2 = new Motorcycle("Ducatti", "Turbo", 2013, "Diesel", 20000);
 
         traleeDealer.addVehicle(car1);
         traleeDealer.addVehicle(car2);
@@ -221,12 +216,6 @@ public class Application extends JFrame implements ActionListener, Serializable 
         is = new ObjectInputStream(new FileInputStream("stock.dat")); //reads in the stock.dat file
         traleeDealer = (Dealership) is.readObject(); //gets the traleeDealer object from the file and sets the applications traleeDealer to it.
 
-        ArrayList<Vehicles> s  =  traleeDealer.stock; // this logs the vehicles being imported, in the console
-        for (Vehicles v :s)
-        {
-            System.out.println(v);
-        }
-
         is.close();
         JOptionPane.showMessageDialog(null,"Successfully loaded in stock data");
 
@@ -249,7 +238,7 @@ public class Application extends JFrame implements ActionListener, Serializable 
 
         Car c1 = new Car(make, model, year, engine, price, nct);
 
-        traleeDealer.stock.add(c1);
+        traleeDealer.addVehicle(c1);
     }
 
     /**This method allows a user to add a new Motorbike into the stock of traleeDealer, from the GUI
@@ -263,78 +252,80 @@ public class Application extends JFrame implements ActionListener, Serializable 
         String engine = JOptionPane.showInputDialog(null, "Enter Engine Type (Petrol or Diesel): ","Add Details", JOptionPane.INFORMATION_MESSAGE);
         double price = Double.parseDouble(JOptionPane.showInputDialog(null,"Enter Motorcycle Price: ","Add Details", JOptionPane.INFORMATION_MESSAGE));
 
-        Motorcycles m1 = new Motorcycles(make, model, year, engine, price);
+        Motorcycle m1 = new Motorcycle(make, model, year, engine, price);
 
-        traleeDealer.stock.add(m1);
+        traleeDealer.addVehicle(m1);
     }
 
 
     /**
-     * Takes in strings that represented what was typed into the search fields on the GUI.
-     * It then searches the stock attribute (which is an ArrayList of vehicles) of the Dealership class for vehicles that match the search terms
+     * Searches the stock attribute (which is an ArrayList of vehicles) of the Dealership class for vehicles that match the search terms
      * It then updates the resultsBox with the correct results
-     * @param manufacturerTerm The value that was in the makeField in the GUI
-     * @param modelTerm The value that was in the modelField in the GUI
-     * @param yearTerm The value that was in the yearField in the GUI
-     * @param engineTerm  The value that was in the engineField in the GUI
      * @return void
      */
-    private void processSearch(String manufacturerTerm, String modelTerm, String yearTerm, String engineTerm) {
+    private void processSearch() {
 
 
-        for (Vehicles vehicle :traleeDealer.stock) {//advanced for loop//This executes the below code for every Vehicle in our arraylist called traleeDealer.stock
-                                            //For each vehicle object (which will call vehicle) in the collection 'traleeDealer.stock', do the following:
+        for (Vehicle vehicleCurrentlyBeingProcessed :traleeDealer.getStock()) {//advanced for loop//This executes the below code for every Vehicle in our arraylist called traleeDealer.stock
+                                            //For each Vehicle object (which  will be called vehicle) in the arrayList (got using traleeDealer.getStock()), do the following
 
-            if ((vehicle.getManufacturer().equals(manufacturerTerm)) && //If you search by Vehicle MAKE, and left the other three fields blank
-                    (modelField.getText().equals("")) &&
-                    (yearField.getText().equals("")) &&
-                    (engineField.getText().equals(""))) {
-                resultsBox.append(vehicle.toString()); //put the results in the results box that match your search
-            }
+            if ((vehicleCurrentlyBeingProcessed.getMake().equals(makeField.getText())) && //If you search by Vehicle MAKE, and left the other three fields blank
+                (modelField.getText().equals("")) &&
+                (yearField.getText().equals("")) &&
+                (engineField.getText().equals("")))
+                {
+                    resultsBox.append(vehicleCurrentlyBeingProcessed.toString()); //put the results in the results box that match your search
+                }
 
 
-            if ((vehicle.getModel().equals(modelTerm)) && //If you search by Vehicle MODEL, and left the other three fields blank
-                    (makeField.getText().equals("")) &&
-                    (yearField.getText().equals("")) &&
-                    (engineField.getText().equals(""))) {
-                resultsBox.append(vehicle.toString()); //put the results in the results box that match your search
-            }
+            else if ((vehicleCurrentlyBeingProcessed.getModel().equals(modelField.getText())) && //If you search by Vehicle MODEL, and left the other three fields blank
+                (makeField.getText().equals("")) &&
+                (yearField.getText().equals("")) &&
+                (engineField.getText().equals("")))
+                {
+                    resultsBox.append(vehicleCurrentlyBeingProcessed.toString()); //put the results in the results box that match your search
+                }
 
-            if ((String.valueOf(vehicle.getYear()).equals(yearTerm) && //If you search by Vehicle YEAR, and left the other three fields blank
-                    (makeField.getText().equals("")) &&
-                    (modelField.getText().equals("")) &&
-                    (engineField.getText().equals("")))) {
-                resultsBox.append(vehicle.toString()); //put the results in the results box that match your search
-            }
-            if ((vehicle.getEngine().equals(engineTerm)) && //If you search by Vehicle ENGINE, and left the other three fields blank
-                    (makeField.getText().equals("")) &&
-                    (modelField.getText().equals("")) &&
-                    (engineField.getText().equals(""))) {
-                resultsBox.append(vehicle.toString()); //put the results in the results box that match your search
-            }
-            if ((vehicle.getModel().equals(modelTerm)) && //If you search by Vehicle MAKE AND MODEL, and left the other two fields blank
-                    (vehicle.getManufacturer().equals(manufacturerTerm)) &&
-                    (yearField.getText().equals("")) &&//
-                    (engineField.getText().equals(""))) {
-                resultsBox.append(vehicle.toString()); //put the results in the results box that match your search
-            }
+            else if ((String.valueOf(vehicleCurrentlyBeingProcessed.getYear()).equals(yearField.getText())) && //If you search by Vehicle YEAR, and left the other three fields blank
+                (makeField.getText().equals("")) &&
+                (modelField.getText().equals("")) &&
+                (engineField.getText().equals("")))
+                {
+                    resultsBox.append(vehicleCurrentlyBeingProcessed.toString()); //put the results in the results box that match your search
+                }
+            else if ((vehicleCurrentlyBeingProcessed.getEngine().equals(engineField.getText())) && //If you search by Vehicle ENGINE, and left the other three fields blank
+                (makeField.getText().equals("")) &&
+                (modelField.getText().equals("")) &&
+                (yearField.getText().equals("")))
+                {
+                    resultsBox.append(vehicleCurrentlyBeingProcessed.toString()); //put the results in the results box that match your search
+                }
+            else if ((vehicleCurrentlyBeingProcessed.getModel().equals(modelField.getText())) && //If you search by Vehicle MAKE AND MODEL, and left the other two fields blank
+                (vehicleCurrentlyBeingProcessed.getMake().equals(makeField.getText())) &&
+                (yearField.getText().equals("")) &&//
+                (engineField.getText().equals("")))
+                {
+                    resultsBox.append(vehicleCurrentlyBeingProcessed.toString()); //put the results in the results box that match your search
+                }
 
 
             //TODO new bits to algo
-            if ((vehicle.getModel().equals(modelTerm)) && //If you search by Vehicle MAKE AND MODEL, and left the other two fields blank
-                    (vehicle.getManufacturer().equals(manufacturerTerm)) &&
-                    (yearField.getText().equals("")) &&//
-                    (engineField.getText().equals(""))) {
-                resultsBox.append(vehicle.toString()); //put the results in the results box that match your search
-            }
-            if ((vehicle.getModel().equals(modelTerm)) && //If you search by Vehicle MAKE AND MODEL, and left the other two fields blank
-                    (vehicle.getManufacturer().equals(manufacturerTerm)) &&
-                    (yearField.getText().equals("")) &&//
-                    (engineField.getText().equals(""))) {
-                resultsBox.append(vehicle.toString()); //put the results in the results box that match your search
-            }
+            else if ((vehicleCurrentlyBeingProcessed.getModel().equals(modelField.getText())) && //If you search by Vehicle MAKE AND MODEL, and left the other two fields blank
+                (vehicleCurrentlyBeingProcessed.getMake().equals(makeField.getText())) &&
+                (yearField.getText().equals("")) &&//
+                (engineField.getText().equals("")))
+                {
+                    resultsBox.append(vehicleCurrentlyBeingProcessed.toString()); //put the results in the results box that match your search
+                }
+            else if ((vehicleCurrentlyBeingProcessed.getModel().equals(modelField.getText())) && //If you search by Vehicle MAKE AND MODEL, and left the other two fields blank
+                (vehicleCurrentlyBeingProcessed.getMake().equals(makeField.getText())) &&
+                (yearField.getText().equals("")) &&//
+                (engineField.getText().equals("")))
+                {
+                    resultsBox.append(vehicleCurrentlyBeingProcessed.toString()); //put the results in the results box that match your search
+                }
 
-            
+
             /**TODO add to algo**/
         }
     }

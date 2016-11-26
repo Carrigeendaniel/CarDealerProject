@@ -4,14 +4,19 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Dealership implements Serializable{//Serializable: allows for output and input
-	
-    ArrayList<Vehicles> stock = new ArrayList<Vehicles>(); //ArrayList of Vehicles
+
+    private ArrayList<Vehicle> stock = new ArrayList<Vehicle>(); //ArrayList of Vehicle
                                                     //Typecasting stock to only contain vehicles( or its subclasses)
     public Dealership() {
     }
 
-    public void addVehicle(Vehicles v1){
+    public void addVehicle(Vehicle v1){
         stock.add(v1);
+    }
+
+    public ArrayList<Vehicle> getStock(){
+
+        return stock;
     }
 
     
