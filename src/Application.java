@@ -88,7 +88,12 @@ public class Application extends JFrame implements ActionListener, Serializable 
 		searchButton.addActionListener(this);
 
         /***************Menu Stuff******************/
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+        frame.setJMenuBar(menuBar);
+
         stockMenu = new JMenu("Stock Management");
+        menuBar.add(stockMenu);
 
         item1 = new JMenuItem("Import Stock Data");
         item1.addActionListener(this);
@@ -112,11 +117,6 @@ public class Application extends JFrame implements ActionListener, Serializable 
         item5 = new JMenuItem("Exit");
         item5.addActionListener(this);
         stockMenu.add(item5);
-
-        JMenuBar menuBar = new JMenuBar();
-        setJMenuBar(menuBar);
-        menuBar.add(stockMenu);
-        frame.setJMenuBar(menuBar);
 
         frame.setSize(650, 1000);
 	}
@@ -267,7 +267,7 @@ public class Application extends JFrame implements ActionListener, Serializable 
 
 
         for (Vehicle vehicleCurrentlyBeingProcessed :traleeDealer.getStock()) {//advanced for loop//This executes the below code for every Vehicle in our arraylist called traleeDealer.stock
-                                            //For each Vehicle object (which  will be called vehicle) in the arrayList (got using traleeDealer.getStock()), do the following
+                                            //For each Vehicle object (which  will be called vehicleCurrentlyBeingProcessed) in the arrayList, do the following
 
             if ((vehicleCurrentlyBeingProcessed.getMake().equals(makeField.getText())) && //If you search by Vehicle MAKE, and left the other three fields blank
                 (modelField.getText().equals("")) &&
@@ -308,15 +308,14 @@ public class Application extends JFrame implements ActionListener, Serializable 
                     resultsBox.append(vehicleCurrentlyBeingProcessed.toString()); //put the results in the results box that match your search
                 }
 
-
-            //TODO new bits to algo
-            else if ((vehicleCurrentlyBeingProcessed.getModel().equals(modelField.getText())) && //If you search by Vehicle MAKE AND MODEL, and left the other two fields blank
+            else if ((vehicleCurrentlyBeingProcessed.getModel().equals(modelField.getText())) &&
                 (vehicleCurrentlyBeingProcessed.getMake().equals(makeField.getText())) &&
-                (yearField.getText().equals("")) &&//
+                (String.valueOf(vehicleCurrentlyBeingProcessed.getYear()).equals(yearField.getText())) &&//
                 (engineField.getText().equals("")))
                 {
                     resultsBox.append(vehicleCurrentlyBeingProcessed.toString()); //put the results in the results box that match your search
                 }
+            //TODO new bits to algo
             else if ((vehicleCurrentlyBeingProcessed.getModel().equals(modelField.getText())) && //If you search by Vehicle MAKE AND MODEL, and left the other two fields blank
                 (vehicleCurrentlyBeingProcessed.getMake().equals(makeField.getText())) &&
                 (yearField.getText().equals("")) &&//
