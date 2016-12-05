@@ -1,4 +1,9 @@
 //Driver and GUI class
+/**
+ * @author ( name = "Sean Byrne", date = "05/12/2016")
+ * This project is a software system for a used car and bike dealership,
+ * dealing with vehicles in stock, adding cars and adding bikes to stock.
+ */
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -20,6 +25,10 @@ public class Application extends JFrame implements ActionListener, Serializable 
     static ObjectInputStream is;//The opposite, allows you to take in information to your program
 	static Dealership traleeDealer;//Object of our dealership class
 
+    /**
+     * This includes the various aspects of my gui
+     * the items on the gui
+     */
 	public Application() {
 
         /**Creating the gui container**/
@@ -121,7 +130,12 @@ public class Application extends JFrame implements ActionListener, Serializable 
         frame.setSize(650, 1000);
 	}
 
-	public void actionPerformed(ActionEvent e) {//What happens when an event occurs
+    /**
+     * What happens when an event occurs
+     *
+     */
+
+	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == searchButton) {//The event is the search button being clicked do this
 
@@ -210,6 +224,10 @@ public class Application extends JFrame implements ActionListener, Serializable 
     /**This method instantiates an ObjectInputStream Object. This retrieves the traleeDealer object that was previously saved to the stock.dat file
      * this method also gets the stock information that was saved in that onject, and puts it into our current traleeDealer file.
      * This allows us to save your stock and then uploaded the latest version when the application is launched**/
+    /**
+     *
+     * the stock file from the Dealership class
+     */
     public static void open() {
         try{
 
@@ -226,7 +244,10 @@ public class Application extends JFrame implements ActionListener, Serializable 
     }
     }
 
-    /**This method allows a user to add a new Car into the stock of traleeDealer, from the GUI**/
+    /** This method allows a user to add a new Car into the stock of traleeDealer, from the GUI
+     *
+     * **/
+
     public static void addCarToStock() {
 
         String make = JOptionPane.showInputDialog(null, "Enter Car Manufacturer: ", "Add details", JOptionPane.INFORMATION_MESSAGE);
@@ -241,7 +262,7 @@ public class Application extends JFrame implements ActionListener, Serializable 
         traleeDealer.addVehicle(c1);
     }
 
-    /**This method allows a user to add a new Motorbike into the stock of traleeDealer, from the GUI
+    /** This method allows a user to add a new Motorbike into the stock of traleeDealer, from the GUI
      * **/
     public static void addMotorcycleToStock() {
 
@@ -261,7 +282,7 @@ public class Application extends JFrame implements ActionListener, Serializable 
     /**
      * Searches the stock attribute (which is an ArrayList of vehicles) of the Dealership class for vehicles that match the search terms
      * It then updates the resultsBox with the correct results
-     * @return void
+     *  void
      */
     private void processSearch() {
 
